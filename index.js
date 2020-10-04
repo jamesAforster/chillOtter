@@ -8,9 +8,28 @@ var T = new Twit ({
   access_token_secret: process.env.TWIT_ACCESS_TOKEN_SECRET
 });
 
-var postOtter = () => { T.post('statuses/update', { status: "🦦" }, function(err, data, response ) {
+var postOtter = () => { T.post('statuses/update', { status: tweet.join("") }, function(err, data, response ) {
   console.log(data)
   });
-}
+};
 
+var tweet = [
+  [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"], ["\n"]],
+  [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"], ["\n"]],
+  [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"], ["\n"]],
+  [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"], ["\n"]],
+  [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"], ["\n"]],
+  [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"], ["\n"]],
+  [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]]
+]
+
+var insertOtter = () => {
+  let otter = "🦦"
+  y = Math.floor(Math.random() * 7)
+  x = Math.floor(Math.random() * 10)
+  tweet[0][x][y] = otter
+};
+
+
+insertOtter();
 postOtter();
