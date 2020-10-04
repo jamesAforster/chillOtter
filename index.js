@@ -27,12 +27,16 @@ var insertOtter = () => {
 
   tweet[x][y] = otter
   tweet[x].pop();
-  
+};
+
+var generateString = () => {
+  insertOtter()
+  let string = ""
   tweet.forEach(char => { 
     string += char.join('')  
     string += "\n"
   })
-  return string
-};
+  console.log(string)
+}
 
-postOtter();
+generateString()
