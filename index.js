@@ -14,6 +14,8 @@ var postOtter = () => { T.post('statuses/update', { status: "🦦" }, function(e
   });
 }
 
-var dailyJob = schedule.scheduleJob('* 8 * * *', function() {
-  postOtter();
+var dailyJob = schedule.scheduleJob('20 15 * * *', function() {
+  console.log("Succesful test")
 })
+
+dailyJob();
