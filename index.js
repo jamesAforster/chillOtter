@@ -13,3 +13,7 @@ var postOtter = () => { T.post('statuses/update', { status: "🦦" }, function(e
   console.log(data)
   });
 }
+
+var dailyJob = schedule.scheduleJob('* 8 * * *', function() {
+  postOtter();
+})
