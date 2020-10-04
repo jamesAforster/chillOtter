@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('node-schedule');
 const Twit = require('twit');
 
 var T = new Twit ({
@@ -8,6 +9,7 @@ var T = new Twit ({
   access_token_secret: process.env.TWIT_ACCESS_TOKEN_SECRET
 });
 
-T.post('statuses/update', { status: "🦦" }, function(err, data, response ) {
+var postOtter = () => { T.post('statuses/update', { status: "🦦" }, function(err, data, response ) {
   console.log(data)
-});
+  });
+}
