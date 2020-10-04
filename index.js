@@ -17,11 +17,11 @@ var tweet = [
   [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]],
   [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]],
   [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]]
-]
+];
 
 var insertOtter = () => {
+  let string = ""
   let otter = "🦦"
-  string = ""
   x = Math.floor(Math.random() * Math.floor(2));
   y = Math.floor(Math.random() * Math.floor(18));
 
@@ -31,8 +31,14 @@ var insertOtter = () => {
   tweet.forEach(char => { 
     string += char.join('')  
     string += "\n"
-  })
+  });
   return string
 };
 
-postOtter();
+var getTweets = () => { T.get('search/tweets', { q: 'otter since:2011-07-11', count: 10 }, function(err, data, response) {
+  console.log(data.statuses[0])
+  });
+};
+
+getTweets();
+
