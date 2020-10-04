@@ -8,36 +8,31 @@ var T = new Twit ({
   access_token_secret: process.env.TWIT_ACCESS_TOKEN_SECRET
 });
 
-var postOtter = () => { T.post('statuses/update', { status: tweet.join('') }, function(err, data, response ) {
+var postOtter = async () => { T.post('statuses/update', { status: await insertOtter() }, function(err, data, response ) {
   console.log(data)
   });
 };
 
 var tweet = [
-  [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]],
-  [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]],
-  [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]],
-  [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]],
-  [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]],
-  [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]],
-  [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]]
+  [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]],
+  [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]],
+  [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]]
 ]
 
 var insertOtter = () => {
   let otter = "🦦"
   string = ""
-  x = Math.floor(Math.random() * (8 - 1 + 1)) + 1;
-  y = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
-  tweet[y][x] = otter
-  tweet[y].pop();
+  x = Math.floor(Math.random() * Math.floor(2));
+  y = Math.floor(Math.random() * Math.floor(18));
+
+  tweet[x][y] = otter
+  tweet[x].pop();
   
   tweet.forEach(char => { 
     string += char.join('')  
     string += "\n"
   })
-
-  console.log(string)
+  return string
 };
 
-
-insertOtter();
+postOtter();
