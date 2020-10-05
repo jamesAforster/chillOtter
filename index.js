@@ -8,7 +8,7 @@ var T = new Twit ({
   access_token_secret: process.env.TWIT_ACCESS_TOKEN_SECRET
 });
 
-var postOtter = async () => { T.post('statuses/update', { status: await insertOtter() }, function(err, data, response ) {
+var postOtter = () => { T.post('statuses/update', { status: insertOtter() }, function(err, data, response ) {
   console.log(data)
   });
 };
@@ -36,7 +36,7 @@ var generateString = () => {
     string += char.join('')  
     string += "\n"
   })
-  console.log(string)
+  return string
 }
 
-generateString()
+postOtter()
