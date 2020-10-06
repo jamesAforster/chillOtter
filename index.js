@@ -28,7 +28,7 @@ var generateString = () => {
     string += e.join('')  
     string += "\n"
   });
-  console.log(string);
+  return string;
 };
 
 var insertOtter = () => {
