@@ -14,29 +14,33 @@ var postOtter = () => { T.post('statuses/update', { status: generateString() }, 
 };
 
 var tweet = [
+  [["🌾"],["🌾"],["🌾"],["🌾"],["🌾"],["🌾"],["🌾"], ["🌾"], ["🌾"] ,["🌾"]],
   [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]],
   [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]],
-  [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]]
-]
+  [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]],
+  [["🌾"],["🌾"],["🌾"],["🌾"],["🌾"],["🌾"],["🌾"], ["🌾"], ["🌾"] ,["🌾"]],
+];
+
+var generateString = () => {
+  insertOtter();
+  let string = ""
+  tweet.forEach(e => { 
+    string += e.join('')  
+    string += "\n"
+  });
+  console.log(string);
+};
 
 var insertOtter = () => {
-  let otter = "🦦"
-  string = ""
-  x = Math.floor(Math.random() * Math.floor(2));
-  y = Math.floor(Math.random() * Math.floor(18));
-
-  tweet[x][y] = otter
+  coordinates = getRandomArrayCoordinates()
+  tweet[coordinates.x][coordinates.y] = "🦦";
   tweet[x].pop();
 };
 
-var generateString = () => {
-  insertOtter()
-  let string = ""
-  tweet.forEach(char => { 
-    string += char.join('')  
-    string += "\n"
-  })
-  return string
+var getRandomArrayCoordinates = () => {
+  x = Math.floor(Math.random() * Math.floor(3) +1);
+  y = Math.floor(Math.random() * Math.floor(18));
+  return {x: x, y: y}
 }
 
 postOtter();
