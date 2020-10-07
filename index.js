@@ -1,46 +1,10 @@
-require('dotenv').config();
-const Twit = require('twit');
+var static = require('node-static');
 
-var T = new Twit ({
-  consumer_key: process.env.TWIT_CONSUMER_KEY,
-  consumer_secret: process.env.TWIT_CONSUMER_SECRET,
-  access_token: process.env.TWIT_ACCESS_TOKEN,
-  access_token_secret: process.env.TWIT_ACCESS_TOKEN_SECRET
-});
+var file = new static.Server();
 
-var postOtter = () => { T.post('statuses/update', { status: generateString() }, function(err, data, response ) {
-  console.log(data)
-  });
-};
+require('http').createServer(function(request, response) {
+  request.addListener('end', function() {
+    file.serve(request, response);
+  }).resume();
 
-var tweet = [
-  [["🌾"],["🌾"],["🌾"],["🌾"],["🌾"],["🌾"],["🌾"], ["🌾"], ["🌾"] ,["🌾"]],
-  [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]],
-  [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]],
-  [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]],
-  [["🌾"],["🌾"],["🌾"],["🌾"],["🌾"],["🌾"],["🌾"], ["🌾"], ["🌾"] ,["🌾"]],
-];
-
-var generateString = () => {
-  insertOtter();
-  let string = ""
-  tweet.forEach(e => { 
-    string += e.join('')  
-    string += "\n"
-  });
-  return string;
-};
-
-var insertOtter = () => {
-  coordinates = getRandomArrayCoordinates()
-  tweet[coordinates.x][coordinates.y] = "🦦";
-  tweet[x].pop();
-};
-
-var getRandomArrayCoordinates = () => {
-  x = Math.floor(Math.random() * Math.floor(3) +1);
-  y = Math.floor(Math.random() * Math.floor(18));
-  return {x: x, y: y}
-}
-
-postOtter();
+}).listen(process.env.PORT || 3000);
