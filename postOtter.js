@@ -24,7 +24,7 @@ var tweet = [
 var generateString = () => {
   insertOtter();
   let string = ""
-  tweet.forEach(e => { 
+  tweet.forEach(e => {  
     string += e.join('')  
     string += "\n"
   });
