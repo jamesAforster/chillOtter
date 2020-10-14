@@ -9,10 +9,10 @@ var T = new Twit ({
   access_token_secret: process.env.TWIT_ACCESS_TOKEN_SECRET
 });
 
-
 replyToTweet = () => { 
   T.get('search/tweets', { q: 'otter', count: 20 }, function(err, data, response) {
     tweetData = data.statuses[5]
+    identifyLanguage(tweetData.text)
     console.log(tweetData)
   })
 }
@@ -53,11 +53,11 @@ var getRandomArrayCoordinates = () => {
   return {x: x, y: y}
 }
 
-// replyToTweet()
+replyToTweet()
 
-// const text = await translate('@maryancoincoin @wdihtbm Go se voir un jour en fait ?', 'es');
+translateTweet = (tweet) => { translate(tweet, { from: 'fr', to: 'en', engine: 'google', key: process.env.GOOGLE_TRANSLATE_KEY })
+    .then(text => {
+      console.log(text);
+  });
+}
 
-translate('@maryancoincoin @wdihtbm Go se voir un jour en fait', { from: 'fr', to: 'en', engine: 'google', key: process.env.GOOGLE_TRANSLATE_KEY })
-.then(text => {
-  console.log(text);  // Hola mundo
-});
