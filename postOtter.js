@@ -8,9 +8,12 @@ var T = new Twit ({
   access_token_secret: process.env.TWIT_ACCESS_TOKEN_SECRET
 });
 
-T.post('statuses/update', { status: "🦦" }, function(err, data, response ) {
-  console.log(data)
-});
+
+var postOtter = () => {
+  T.post('statuses/update', { status: generateString() }, function(err, data, response ) {
+    console.log(data)
+  });
+}
 
 var tweet = [
   [["🌾"],["🌾"],["🌾"],["🌾"],["🌾"],["🌾"],["🌾"], ["🌾"], ["🌾"] ,["🌾"]],
