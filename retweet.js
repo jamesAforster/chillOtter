@@ -1,5 +1,6 @@
 require('dotenv').config();
 const Twit = require('twit');
+const translate = require('translate');
 
 var T = new Twit ({
   consumer_key: process.env.TWIT_CONSUMER_KEY,
@@ -12,7 +13,7 @@ var T = new Twit ({
 replyToTweet = () => { 
   T.get('search/tweets', { q: 'otter', count: 20 }, function(err, data, response) {
     tweetData = data.statuses[5]
-    postReply(tweetData)
+    console.log(tweetData)
   })
 }
 
@@ -52,4 +53,11 @@ var getRandomArrayCoordinates = () => {
   return {x: x, y: y}
 }
 
-replyToTweet()
+// replyToTweet()
+
+// const text = await translate('@maryancoincoin @wdihtbm Go se voir un jour en fait ?', 'es');
+
+translate('@maryancoincoin @wdihtbm Go se voir un jour en fait', { from: 'fr', to: 'en', engine: 'google', key: process.env.GOOGLE_TRANSLATE_KEY })
+.then(text => {
+  console.log(text);  // Hola mundo
+});
