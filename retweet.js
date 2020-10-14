@@ -16,10 +16,6 @@ replyToTweet = () => {
   })
 }
 
-// I want to define a variable inside findTweet called replyTweet, then I can access the properties of that for the
-// replyToTweet function where I need user.id_str
-// generateString() where I need user.screen_name
-
 postReply = (tweetData) => { 
   T.post('statuses/update', { status: generateReply(tweetData), in_reply_to_status_id: tweetData.id_str }, function(err, data, response) {
     console.log(data)
