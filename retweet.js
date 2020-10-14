@@ -9,10 +9,10 @@ var T = new Twit ({
   access_token_secret: process.env.TWIT_ACCESS_TOKEN_SECRET
 });
 
-replyToTweet = () => { 
+replyToTweet = (message) => { 
   T.get('search/tweets', { q: 'otter', count: 20 }, function(err, data, response) {
     tweetData = data.statuses[5]
-    identifyLanguage(tweetData.text)
+    message = translateReply(tweetData, message)
     console.log(tweetData)
   })
 }
@@ -53,11 +53,10 @@ var getRandomArrayCoordinates = () => {
   return {x: x, y: y}
 }
 
-replyToTweet()
+replyToTweet("Hey there this is my reply")
 
-translateTweet = (tweet) => { translate(tweet, { from: 'fr', to: 'en', engine: 'google', key: process.env.GOOGLE_TRANSLATE_KEY })
+translateReply = (tweet, message) => { translate(message, { from: 'en', to: tweet.lang, engine: 'google', key: process.env.GOOGLE_TRANSLATE_KEY })
     .then(text => {
       console.log(text);
   });
 }
-
