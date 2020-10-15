@@ -10,8 +10,8 @@ var T = new Twit ({
 
 
 replyToTweet = () => { 
-  T.get('search/tweets', { q: 'otter', count: 20 }, function(err, data, response) {
-    tweetData = data.statuses[5]
+  T.get('search/tweets', { q: 'otter', count: 50 }, function(err, data, response) {
+    tweetData = data.statuses[25]
     postReply(tweetData)
   })
 }
