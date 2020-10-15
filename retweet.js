@@ -9,18 +9,20 @@ var T = new Twit ({
   access_token_secret: process.env.TWIT_ACCESS_TOKEN_SECRET
 });
 
-replyToTweet = (message) => { 
+replyToRandomTweet = (message) => { 
   T.get('search/tweets', { q: 'otter', count: 20 }, function(err, data, response) {
     tweetData = data.statuses[5]
-    message = translateReply(tweetData, message)
     console.log(tweetData)
+    translatedMessage = translateReply(tweetData, message)
+    postReply(tweetData, translatedMessage)
   })
 }
 
-postReply = (tweetData) => { 
-  T.post('statuses/update', { status: generateReply(tweetData), in_reply_to_status_id: tweetData.id_str }, function(err, data, response) {
-    console.log(data)
-  })
+postReply = (tweetData, translatedMessage) => { 
+
+  // T.post('statuses/update', { status: generateReply(tweetData, translatedMessage), in_reply_to_status_id: tweetData.id_str }, function(err, data, response) {
+  //   console.log(data)
+  // })
 }
 
 var tweet = [
@@ -31,14 +33,14 @@ var tweet = [
   [["🌾"],["🌾"],["🌾"],["🌾"],["🌾"],["🌾"],["🌾"], ["🌾"], ["🌾"] ,["🌾"]],
 ];
 
-var generateReply = (replyTweet) => {
+var generateReply = (replyTweet, translatedMessage) => {
   insertOtter();
   let string = ""
   tweet.forEach(e => { 
     string += e.join('')  
     string += "\n"
   });
-  return string + `\n\n did someone say otter? @${replyTweet.user.screen_name}`;
+  return string + `\n\n ${translatedMessage} @${replyTweet.user.screen_name}`;
 };
 
 var insertOtter = () => {
@@ -53,7 +55,7 @@ var getRandomArrayCoordinates = () => {
   return {x: x, y: y}
 }
 
-replyToTweet("Hey there this is my reply")
+replyToRandomTweet("did someone say otter?")
 
 translateReply = (tweet, message) => { translate(message, { from: 'en', to: tweet.lang, engine: 'google', key: process.env.GOOGLE_TRANSLATE_KEY })
     .then(text => {
